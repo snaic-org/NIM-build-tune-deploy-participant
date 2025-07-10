@@ -1,0 +1,40 @@
+graph TB
+    subgraph "NVIDIA NeMo Ecosystem"
+        A[NeMo Framework<br/>Core Library]
+        B[NeMo Guardrails<br/>AI Safety]
+        C[NeMo Curator<br/>Data Prep]
+        D[NeMo Aligner<br/>RLHF/DPO]
+    end
+    
+    subgraph "Model Formats"
+        E[".nemo files<br/>Legacy"]
+        F[".distcp files<br/>NeMo 2"]
+    end
+    
+    subgraph "Deployment"
+        G[NVIDIA NIM<br/>Containers]
+        H[TensorRT<br/>Optimization]
+        I[Triton<br/>Inference Server]
+    end
+    
+    subgraph "Training Backend"
+        J[PyTorch Lightning]
+        K[Megatron-LM]
+        L[DeepSpeed]
+    end
+    
+    A --> E
+    A --> F
+    A --> G
+    A --> H
+    
+    J --> A
+    K --> A
+    L --> A
+    
+    B --> G
+    C --> A
+    D --> A
+    
+    style A fill:#76b900
+    style G fill:#0071c5 

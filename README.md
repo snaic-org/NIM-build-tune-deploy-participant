@@ -1,120 +1,55 @@
-# NIM Workshop - Presenter Edition
+# NIM Workshop - Presenter Materials
 
-This repository contains workshop materials for learning about NVIDIA NIM (NVIDIA Inference Microservice) with Llama 3.2 1B Instruct model.
+This folder contains all the materials needed to present the NVIDIA NIM workshop on building, tuning, and deploying LLMs.
 
-## Prerequisites
+## 📚 Workshop Notebooks
 
-- NGC Account and API Key from [ngc.nvidia.com](https://ngc.nvidia.com)
-- NVIDIA API Key from [build.nvidia.com](https://build.nvidia.com)
-- Docker installed and running
-- 15GB+ free disk space
-- (Optional) NVIDIA GPU for local deployment
+1. **00_Workshop_Setup.ipynb** - Initial setup and model download
+2. **01_Introduction_to_NIMs.ipynb** - Understanding NVIDIA NIMs
+3. **02_Running_NIM_Containers.ipynb** - Hands-on with NIM containers
+4. **03_LoRA_Training_NeMo_with_scripts.ipynb** - Fine-tuning with LoRA
+5. **04_Deploying_LoRA_NIMs.ipynb** - Deploying custom models
 
-## Quick Start
+## 📁 Required Directories
 
-1. **Run the setup notebook**: `00_Workshop_Setup.ipynb`
-   - Sets up API keys
-   - Downloads Llama 3.2 1B Instruct model
-   - Pulls NIM Docker container
+- `lora_tutorial/` - Created during the workshop for LoRA training
+- `nim_cache/` - For NIM container caching
+- `ngc-cli/` - NGC CLI installation (included)
+- `NeMo/` - Cloned during notebook 03
 
-2. **Follow the workshop notebooks in order**:
-   - `01_NIM_API_Tutorial_with_scripts.ipynb` - Use cloud-hosted NIMs
-   - `02_Local_NIM_Deployment_with_scripts.ipynb` - Deploy locally with Docker
-   - `03_LoRA_Training_NeMo_with_scripts_FIXED.ipynb` - Fine-tune with LoRA
-   - `04_Deploy_LoRA_with_NIM_with_scripts.ipynb` - Deploy fine-tuned models
+## 🚀 Getting Started
 
-## Model Information
+1. Ensure you have your NGC API key ready
+2. Start with `00_Workshop_Setup.ipynb`
+3. Follow the notebooks in order
+4. Each notebook builds on the previous one
 
-- **Model**: Llama 3.2 1B Instruct
-- **Size**: 2.3GB
-- **Format**: NeMo 2 distributed checkpoint
-- **NGC Path**: `nvidia/nemo/llama-3_2-1b-instruct:2.0`
+## 📖 Additional Documentation
 
-## Workshop Contents
+- **NeMo_2_explanation.md** - Comprehensive guide to NeMo Framework & distributed checkpoint format
+  - Explains the entire NeMo ecosystem (Framework, Guardrails, Curator, Aligner)
+  - Details the `.distcp` file format you'll encounter
+  - Compares NeMo with other frameworks (Hugging Face, PyTorch, DeepSpeed)
+  - Includes extensive Q&A section covering common questions
+  - When to use which NeMo component
+  
+- **nemo_ecosystem_diagram.mmd** - Visual diagram of the NeMo ecosystem
+  - Shows relationships between NeMo components
+  - Illustrates the flow from training to deployment
 
-### 1. NIM API Tutorial
-Learn to use NVIDIA's cloud-hosted inference endpoints for immediate AI capabilities.
+## 🔧 Requirements
 
-### 2. Local NIM Deployment
-Deploy NIMs on your own hardware using Docker containers.
+- GPU with at least 24GB memory (RTX 4090 or better)
+- Docker with GPU support
+- ~50GB free disk space
+- NGC account and API key
 
-### 3. LoRA Fine-tuning
-Customize the model for your specific use case using Low-Rank Adaptation.
+## 📝 Notes
 
-### 4. Deploy LoRA with NIM
-Serve your fine-tuned models through the NIM framework.
+- The Llama 3.2 1B model is used throughout for efficiency
+- LoRA training takes approximately 5-10 minutes
+- NIM deployment requires pulling container images (~15GB)
 
-## Troubleshooting
+---
 
-If you encounter issues:
-1. Verify your API keys are correct
-2. Ensure Docker is running
-3. Check that you have sufficient disk space
-4. For model downloads, ensure you're using NGC CLI from the `ngc-cli` directory
-
-## Support
-
-For questions or issues, please refer to:
-- [NVIDIA NIM Documentation](https://docs.nvidia.com/nim/)
-- [NGC Support](https://www.nvidia.com/en-sg/support/)
-
-## Workshop Structure
-
-```
-NIM Workshop - Presenter/
-├── 00_Workshop_Setup.ipynb
-├── 01_NIM_API_Tutorial_with_scripts.ipynb
-├── 02_Local_NIM_Deployment_with_scripts.ipynb
-├── 03_LoRA_Training_NeMo_with_scripts.ipynb
-├── 04_Deploy_LoRA_with_NIM_with_scripts.ipynb
-├── README.md
-├── .gitignore
-├── img/
-│   └── sample_image.jpg
-├── lora_tutorial/
-│   ├── configs/
-│   ├── data/
-│   └── models/
-└── ngc-cli/
-```
-
-## Common Issues
-
-### NGC CLI Installation
-The setup notebook handles NGC CLI installation automatically. The CLI is pre-installed in the `ngc-cli` directory.
-
-### Docker Authentication
-If Docker pulls fail with "unauthorized":
-```bash
-docker login nvcr.io -u $oauthtoken -p YOUR_NGC_API_KEY
-```
-
-### Model Download Issues
-The Llama 3.2 1B Instruct model is publicly accessible with a standard NGC API key. If downloads fail:
-1. Verify your NGC API key is correct
-2. Check your internet connection
-3. Ensure you have sufficient disk space (at least 3GB)
-
-### Model Downloads
-If automatic download fails, you can manually download from:
-- [Llama 3.2 1B Instruct](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/nemo/models/llama-3_2-1b-instruct)
-
-Place the `.nemo` file in `lora_tutorial/models/llama-3.2-1b-instruct-nemo/`
-
-## For Workshop Presenters
-
-- Run the setup notebook before the workshop to pre-download everything
-- The `.env` file saves API keys between sessions
-- Test Docker containers with:
-  ```bash
-  docker run --rm nvcr.io/nim/meta/llama-3.2-1b-instruct:latest echo "Ready!"
-  ```
-
-## Security Note
-
-Never commit `.env` files to git! Add to `.gitignore`:
-```
-.env
-*.nemo
-__pycache__/
-``` 
+For the participant version without presenter scripts, see the "NIM Workshop - Participant" folder. 
