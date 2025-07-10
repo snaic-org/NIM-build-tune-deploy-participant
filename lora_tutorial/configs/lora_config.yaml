@@ -10,7 +10,7 @@ trainer:
   enable_checkpointing: true
   logger: true
 model:
-  restore_from_path: lora_tutorial/models/llama-3-8b-instruct-nemo_v1.0/8b_instruct_nemo_bf16.nemo
+  restore_from_path: lora_tutorial/models/llama-3_2-1b-instruct/llama-3_2-1b-instruct_v2.0/1b_instruct_nemo_bf16.nemo
   peft:
     peft_scheme: lora
     restore_from_path: null

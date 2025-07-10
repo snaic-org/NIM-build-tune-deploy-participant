@@ -56,7 +56,7 @@ If you encounter issues:
 
 For questions or issues, please refer to:
 - [NVIDIA NIM Documentation](https://docs.nvidia.com/nim/)
-- [NGC Support](https://ngc.nvidia.com/support)
+- [NGC Support](https://www.nvidia.com/en-sg/support/)
 
 ## Workshop Structure
 
@@ -65,7 +65,7 @@ NIM Workshop - Presenter/
 ├── 00_Workshop_Setup.ipynb
 ├── 01_NIM_API_Tutorial_with_scripts.ipynb
 ├── 02_Local_NIM_Deployment_with_scripts.ipynb
-├── 03_LoRA_Training_NeMo_with_scripts_FIXED.ipynb
+├── 03_LoRA_Training_NeMo_with_scripts.ipynb
 ├── 04_Deploy_LoRA_with_NIM_with_scripts.ipynb
 ├── README.md
 ├── .gitignore

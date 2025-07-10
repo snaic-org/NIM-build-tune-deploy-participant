@@ -31,3 +31,6 @@ ngccli_linux.zip
 # OS files
 .DS_Store
 Thumbs.db 
+
+# NeMo repository (should be cloned by users)
+NeMo/ 
