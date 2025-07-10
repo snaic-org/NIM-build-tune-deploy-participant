@@ -1,0 +1,70 @@
+name: customer_support_lora
+trainer:
+  devices: 1
+  accelerator: gpu
+  num_nodes: 1
+  precision: bf16
+  max_epochs: 3
+  max_steps: 100
+  val_check_interval: 25
+  enable_checkpointing: true
+  logger: true
+model:
+  restore_from_path: lora_tutorial/models/llama-3-8b-instruct-nemo_v1.0/8b_instruct_nemo_bf16.nemo
+  peft:
+    peft_scheme: lora
+    restore_from_path: null
+    lora_tuning:
+      target_modules:
+      - attention_qkv
+      adapter_dim: 32
+      adapter_dropout: 0.1
+      column_init_method: xavier
+      row_init_method: zero
+      layer_selection: null
+      weight_tying: false
+  data:
+    train_ds:
+      file_names:
+      - ./lora_tutorial/data/train.jsonl
+      global_batch_size: 2
+      micro_batch_size: 1
+      shuffle: true
+      num_workers: 4
+      pin_memory: true
+      max_seq_length: 512
+      min_seq_length: 1
+      drop_last: false
+      concat_sampling_probabilities:
+      - 1.0
+      prompt_template: '{input} {output}'
+    validation_ds:
+      file_names:
+      - ./lora_tutorial/data/val.jsonl
+      global_batch_size: 2
+      micro_batch_size: 1
+      shuffle: false
+      num_workers: 4
+      pin_memory: true
+      max_seq_length: 512
+  optim:
+    name: fused_adam
+    lr: 0.0005
+    weight_decay: 0.01
+    betas:
+    - 0.9
+    - 0.999
+    sched:
+      name: CosineAnnealing
+      warmup_steps: 10
+      constant_steps: 0
+      min_lr: 1.0e-05
+exp_manager:
+  explicit_log_dir: ./lora_tutorial/experiments
+  exp_dir: null
+  name: customer_support_lora
+  create_checkpoint_callback: true
+  checkpoint_callback_params:
+    monitor: val_loss
+    save_top_k: 3
+    mode: min
