@@ -97,7 +97,7 @@ The Llama 3.2 1B Instruct model is publicly accessible with a standard NGC API k
 
 ### Model Downloads
 If automatic download fails, you can manually download from:
-- [Llama 3.2 1B Instruct](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/nemo/models/llama-3_2-1b-instruct-nemo)
+- [Llama 3.2 1B Instruct](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/nemo/models/llama-3_2-1b-instruct)
 
 Place the `.nemo` file in `lora_tutorial/models/llama-3.2-1b-instruct-nemo/`
 
