@@ -1,69 +1,70 @@
-# NeMo 2.0 Adaptation Summary
+# NeMo 2.0 Checkpoint Compatibility Summary
 
-## Changes Made to Support NeMo 2.0
+## Current Setup
 
-### 1. Model Format Compatibility
-- The downloaded Llama 3.2 1B model uses NeMo 2.0 distributed checkpoint format
-- This format includes:
-  - `weights/` directory with `.distcp` files  
-  - `context/` directory with `model.yaml` configuration
-- The training scripts are backward compatible and can load this format
+- **NeMo Version**: 2.0.0rc0 (release candidate)
+- **Checkpoint Format**: NeMo 2.0 distributed checkpoint (.distcp files)
+- **Training Approach**: Script-based using `megatron_gpt_finetuning.py`
 
-### 2. Notebook Updates
+## Key Findings
 
-#### 03_LoRA_Training_NeMo_with_scripts.ipynb
-1. **Added NeMo version compatibility notes** explaining that:
-   - Downloaded model is in NeMo 2.0 format
-   - Training scripts support both NeMo 1.0 and 2.0 formats
-   
-2. **Enhanced model verification** to show NeMo 2.0 checkpoint structure:
-   ```
-   ✅ Llama 3.2 1B model found (NeMo 2.0 distributed checkpoint)
-   📁 NeMo 2.0 Checkpoint Structure:
-      lora_tutorial/models/llama-3_2-1b-instruct/llama-3_2-1b-instruct_v2.0/
-      ├── weights/     # Contains .distcp files (distributed checkpoint)
-      └── context/     # Contains model.yaml configuration
-   ```
+### 1. NeMo 2.0.0rc0 Status
+- This is a release candidate that still uses NeMo 1.x API structure
+- Does NOT have the new `llm` module or simplified APIs yet
+- Can successfully load NeMo 2.0 distributed checkpoint format
+- Script-based training approach is the correct method for this version
 
-3. **Added NeMo 2.0 API example** showing the modern approach:
-   ```python
-   # NeMo 2.0 API for LoRA training
-   llm.finetune(
-       model=model_path,  # Can load from path directly
-       data=data,
-       trainer=trainer,
-       peft=peft_config,
-       optim=optimizer,
-   )
-   ```
+### 2. Checkpoint Compatibility ✓
+The downloaded Llama 3.2 1B model uses NeMo 2.0 distributed checkpoint format:
+```
+lora_tutorial/models/llama-3_2-1b-instruct/llama-3_2-1b-instruct_v2.0/
+├── weights/     # Contains .distcp files (distributed checkpoint)
+│   ├── __0_0.distcp
+│   ├── __0_1.distcp
+│   └── ...
+└── context/     # Contains model.yaml configuration
+```
 
-4. **Updated training script** to explicitly check for NeMo 2.0 format and provide better error messages
+The training scripts (`megatron_gpt_finetuning.py`) can automatically detect and load this format.
 
-### 3. Two Training Approaches
+### 3. Compatibility Fix Required ⚠️
+The training script expects `model_config.yaml` in the checkpoint root (NeMo 1.0 structure), but NeMo 2.0 checkpoints have `model.yaml` inside the `context/` folder.
 
-The notebook now presents two approaches:
+**Solution**: Create a symlink before training:
+```bash
+cd lora_tutorial/models/llama-3_2-1b-instruct/llama-3_2-1b-instruct_v2.0
+ln -s context/model.yaml model_config.yaml
+```
 
-1. **Script-based (Recommended for Workshop)**
-   - Uses `megatron_gpt_finetuning.py` script
-   - Works with minimal dependencies
-   - Automatically handles NeMo 2.0 checkpoint format
-   
-2. **API-based (Modern NeMo 2.0)**
-   - Uses `llm.finetune()` API
-   - Requires full NeMo installation
-   - More programmatic control
+The notebook now includes this fix automatically in the code cells before training.
 
-### 4. Key Benefits of NeMo 2.0
-- Native distributed checkpoint support
-- Simplified APIs for fine-tuning
-- Better integration with model parallelism
-- Direct path loading without conversion
+### 4. Training Approach
+The notebook correctly uses the script-based approach:
+```bash
+torchrun --nproc_per_node=1 \
+"${NEMO_PATH}/examples/nlp/language_modeling/tuning/megatron_gpt_finetuning.py" \
+    model.restore_from_path=${MODEL} \  # Points to NeMo 2.0 checkpoint
+    model.peft.peft_scheme=lora \
+    ...
+```
 
-### 5. Backward Compatibility
-The workshop maintains full backward compatibility:
-- Training scripts detect and handle both formats automatically
-- No changes required to existing workflows
-- Same LoRA adapter output format
+### 5. What Works
+- ✅ Loading NeMo 2.0 distributed checkpoints (with symlink fix)
+- ✅ LoRA fine-tuning with script-based approach
+- ✅ Generating .nemo adapter files for NIM deployment
+- ✅ All existing workflows remain functional
 
-## Result
-The workshop now seamlessly works with NeMo 2.0 distributed checkpoints while maintaining simplicity for workshop participants. Users can choose between the simple script-based approach or explore the modern API-based approach based on their needs. 
+### 6. What Doesn't Work (Yet)
+- ❌ New `nemo.collections.llm` module (not in rc0)
+- ❌ Simplified `llm.finetune()` API
+- ❌ Modern Python-first approach
+
+## Conclusion
+
+The workshop notebook is correctly configured to:
+1. Use NeMo 2.0 distributed checkpoint format
+2. Apply the necessary compatibility fix (symlink)
+3. Train LoRA adapters using the proven script-based approach
+4. Produce compatible outputs for NIM deployment
+
+When NeMo 2.0 final is released with the new APIs, minimal changes will be needed since the checkpoint format is already compatible. 
