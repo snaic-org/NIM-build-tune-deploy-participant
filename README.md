@@ -46,7 +46,11 @@ This folder contains all the materials needed to present the NVIDIA NIM workshop
 
 ## 📝 Notes
 
-- The Llama 3.2 1B model is used throughout for efficiency
+### Technical Details
+
+- All notebooks include presenter scripts for a seamless teaching experience
+- The Llama 3.1 8B model is used throughout for efficiency
+- Each notebook is self-contained with all necessary setup steps
 - LoRA training takes approximately 5-10 minutes
 - NIM deployment requires pulling container images (~15GB)
 
