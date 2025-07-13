@@ -16,7 +16,7 @@ Learn how to:
 2. **[01_NIM_API_Tutorial_with_scripts.ipynb](01_NIM_API_Tutorial_with_scripts.ipynb)** - Introduction to NVIDIA NIM cloud APIs
 3. **[02_Local_NIM_Deployment_with_scripts.ipynb](02_Local_NIM_Deployment_with_scripts.ipynb)** - Deploy NIM containers locally
 4. **[03_LoRA_Training_NeMo_with_scripts.ipynb](03_LoRA_Training_NeMo_with_scripts.ipynb)** - Fine-tune models with LoRA
-5. **[04_Deploy_LoRA_with_NIM_with_scripts.ipynb](04_Deploy_LoRA_with_NIM_with_scripts.ipynb)** - Deploy LoRA adapters in production
+5. **[04_Deploy_LoRA_with_NIM_with_scripts.ipynb](04_Deploy_LoRA_with_NIM_with_scripts.ipynb)** - Deploy LoRA adapters
 
 ## 🚀 Prerequisites
 
