@@ -1,59 +1,72 @@
-# NIM Workshop - Presenter Materials
+# NIM Build, Tune & Deploy Workshop
 
-This folder contains all the materials needed to present the NVIDIA NIM workshop on building, tuning, and deploying LLMs.
+This repository contains hands-on notebooks for the NVIDIA NIM workshop, demonstrating how to build, fine-tune, and deploy Large Language Models using NVIDIA's AI stack.
+
+## 🎯 Workshop Overview
+
+Learn how to:
+- Use NVIDIA NIM APIs for cloud-based inference
+- Deploy NIM containers locally with GPU acceleration
+- Fine-tune LLMs using LoRA (Low-Rank Adaptation) with NeMo
+- Deploy custom LoRA adapters with NIM for production use
 
 ## 📚 Workshop Notebooks
 
-1. **00_Workshop_Setup.ipynb** - Initial setup and model download
-2. **01_Introduction_to_NIMs.ipynb** - Understanding NVIDIA NIMs
-3. **02_Running_NIM_Containers.ipynb** - Hands-on with NIM containers
-4. **03_LoRA_Training_NeMo_with_scripts.ipynb** - Fine-tuning with LoRA
-5. **04_Deploying_LoRA_NIMs.ipynb** - Deploying custom models
+1. **[00_Workshop_Setup.ipynb](00_Workshop_Setup.ipynb)** - Initial setup and environment configuration
+2. **[01_NIM_API_Tutorial_with_scripts.ipynb](01_NIM_API_Tutorial_with_scripts.ipynb)** - Introduction to NVIDIA NIM cloud APIs
+3. **[02_Local_NIM_Deployment_with_scripts.ipynb](02_Local_NIM_Deployment_with_scripts.ipynb)** - Deploy NIM containers locally
+4. **[03_LoRA_Training_NeMo_with_scripts.ipynb](03_LoRA_Training_NeMo_with_scripts.ipynb)** - Fine-tune models with LoRA
+5. **[04_Deploy_LoRA_with_NIM_with_scripts.ipynb](04_Deploy_LoRA_with_NIM_with_scripts.ipynb)** - Deploy LoRA adapters in production
 
-## 📁 Required Directories
+## 🚀 Prerequisites
 
-- `lora_tutorial/` - Created during the workshop for LoRA training
-- `nim_cache/` - For NIM container caching
-- `ngc-cli/` - NGC CLI installation (included)
-- `NeMo/` - Cloned during notebook 03
+- NVIDIA GPU (A100, V100, or similar)
+- Docker with NVIDIA nvcr.io/nvidia/nemo:24.05.01 Container Runtime
+- Python 3.8+
+- NGC Account (free at [ngc.nvidia.com](https://ngc.nvidia.com))
 
-## 🚀 Getting Started
+## 🛠️ Quick Start
 
-1. Ensure you have your NGC API key ready
-2. Start with `00_Workshop_Setup.ipynb`
-3. Follow the notebooks in order
-4. Each notebook builds on the previous one
+1. Clone this repository:
+```bash
+git clone https://github.com/darren236/NIM-build-tune-deploy-participant.git
+cd NIM-build-tune-deploy-participant
+```
 
-## 📖 Additional Documentation
+2. Run the setup notebook:
+```bash
+jupyter notebook 00_Workshop_Setup.ipynb
+```
 
-- **NeMo_2_explanation.md** - Comprehensive guide to NeMo Framework & distributed checkpoint format
-  - Explains the entire NeMo ecosystem (Framework, Guardrails, Curator, Aligner)
-  - Details the `.distcp` file format you'll encounter
-  - Compares NeMo with other frameworks (Hugging Face, PyTorch, DeepSpeed)
-  - Includes extensive Q&A section covering common questions
-  - When to use which NeMo component
-  
-- **nemo_ecosystem_diagram.mmd** - Visual diagram of the NeMo ecosystem
-  - Shows relationships between NeMo components
-  - Illustrates the flow from training to deployment
+3. Follow the notebooks in order (00 → 01 → 02 → 03 → 04)
 
-## 🔧 Requirements
+## 📁 Repository Structure
 
-- GPU with at least 24GB memory (RTX 4090 or better)
-- Docker with GPU support
-- ~50GB free disk space
-- NGC account and API key
+```
+NIM-build-tune-deploy-participant/
+├── 00_Workshop_Setup.ipynb              # Environment setup
+├── 01_NIM_API_Tutorial_with_scripts.ipynb    # Cloud API tutorial
+├── 02_Local_NIM_Deployment_with_scripts.ipynb # Local deployment
+├── 03_LoRA_Training_NeMo_with_scripts.ipynb  # LoRA training
+├── 04_Deploy_LoRA_with_NIM_with_scripts.ipynb # LoRA deployment
+├── lora_tutorial/                       # Training data and configs
+│   └── data/                           # Sample datasets
+└── img/                                # Workshop images
+```
+
+## 🔧 Key Technologies
+
+- **NVIDIA NIM**: Inference microservices for optimized model deployment
+- **NeMo Framework**: For training and fine-tuning LLMs
+- **LoRA**: Efficient fine-tuning technique
+- **Docker**: Container-based deployment
 
 ## 📝 Notes
 
-### Technical Details
+- Each notebook includes presenter scripts for workshop delivery
+- Notebooks are designed to work on cloud GPU instances (AWS, GCP, Azure)
+- The workshop uses Llama 3.1 8B Instruct as the base model
 
-- All notebooks include presenter scripts for a seamless teaching experience
-- The Llama 3.1 8B model is used throughout for efficiency
-- Each notebook is self-contained with all necessary setup steps
-- LoRA training takes approximately 5-10 minutes
-- NIM deployment requires pulling container images (~15GB)
+## 📄 License
 
----
-
-For the participant version without presenter scripts, see the "NIM Workshop - Participant" folder. 
+This workshop material is provided for educational purposes. Model usage is subject to respective model licenses. 
