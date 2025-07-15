@@ -63,8 +63,6 @@ NIM-build-tune-deploy-participant/
 
 ## 📝 Notes
 
-- Each notebook includes presenter scripts for workshop delivery
-- Notebooks are designed to work on cloud GPU instances (AWS, GCP, Azure)
 - The workshop uses Llama 3.1 8B Instruct as the base model
 
 ## 📄 License
