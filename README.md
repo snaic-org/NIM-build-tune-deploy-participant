@@ -13,23 +13,33 @@ Learn how to:
 ## 📚 Workshop Notebooks
 
 1. **[00_Workshop_Setup.ipynb](00_Workshop_Setup.ipynb)** - Initial setup and environment configuration
-2. **[01_NIM_API_Tutorial_with_scripts.ipynb](01_NIM_API_Tutorial_with_scripts.ipynb)** - Introduction to NVIDIA NIM cloud APIs
-3. **[02_Local_NIM_Deployment_with_scripts.ipynb](02_Local_NIM_Deployment_with_scripts.ipynb)** - Deploy NIM containers locally
-4. **[03_LoRA_Training_NeMo_with_scripts.ipynb](03_LoRA_Training_NeMo_with_scripts.ipynb)** - Fine-tune models with LoRA
-5. **[04_Deploy_LoRA_with_NIM_with_scripts.ipynb](04_Deploy_LoRA_with_NIM_with_scripts.ipynb)** - Deploy LoRA adapters
+2. **[01_NIM_API_Tutorial.ipynb](01_NIM_API_Tutorial.ipynb)** - Introduction to NVIDIA NIM cloud APIs
+3. **[02_Local_NIM_Deployment.ipynb](02_Local_NIM_Deployment.ipynb)** - Deploy NIM containers locally
+4. **[03_LoRA_Training_NeMo.ipynb](03_LoRA_Training_NeMo.ipynb)** - Fine-tune models with LoRA
+5. **[04_Deploy_LoRA_with_NIM.ipynb](04_Deploy_LoRA_with_NIM.ipynb)** - Deploy LoRA adapters
 
 ## 🚀 Prerequisites
 
 - NVIDIA GPU (A100, V100, or similar)
-- Docker with NVIDIA nvcr.io/nvidia/nemo:24.05.01 Container Runtime
+- Docker with NVIDIA Container Runtime
 - Python 3.8+
 - NGC Account (free at [ngc.nvidia.com](https://ngc.nvidia.com))
+- NVIDIA API Key (get one at [build.nvidia.com](https://build.nvidia.com))
+
+## 🔑 API Keys Setup
+
+This workshop requires three API keys (stored in a `.env` file):
+- **NVIDIA_API_KEY**: For accessing NVIDIA's cloud API services
+- **NGC_API_KEY**: For downloading NIM containers from NVIDIA GPU Cloud
+- **NGC_CLI_API_KEY**: For NGC CLI operations (optional, uses NGC_API_KEY as fallback)
+
+The setup notebook (00_Workshop_Setup.ipynb) will guide you through obtaining and configuring these keys.
 
 ## 🛠️ Quick Start
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/darren236/NIM-build-tune-deploy-participant.git
+git clone https://github.com/snaic-org/NIM-build-tune-deploy-participant.git
 cd NIM-build-tune-deploy-participant
 ```
 
@@ -44,14 +54,18 @@ jupyter notebook 00_Workshop_Setup.ipynb
 
 ```
 NIM-build-tune-deploy-participant/
-├── 00_Workshop_Setup.ipynb              # Environment setup
-├── 01_NIM_API_Tutorial_with_scripts.ipynb    # Cloud API tutorial
-├── 02_Local_NIM_Deployment_with_scripts.ipynb # Local deployment
-├── 03_LoRA_Training_NeMo_with_scripts.ipynb  # LoRA training
-├── 04_Deploy_LoRA_with_NIM_with_scripts.ipynb # LoRA deployment
-├── lora_tutorial/                       # Training data and configs
-│   └── data/                           # Sample datasets
-└── img/                                # Workshop images
+├── 00_Workshop_Setup.ipynb         # Environment setup & API key configuration
+├── 01_NIM_API_Tutorial.ipynb       # Cloud API tutorial
+├── 02_Local_NIM_Deployment.ipynb   # Local deployment
+├── 03_LoRA_Training_NeMo.ipynb     # LoRA training
+├── 04_Deploy_LoRA_with_NIM.ipynb   # LoRA deployment
+├── openai_example/                 # OpenAI API compatibility examples
+│   └── openai_api_example.ipynb   # Example using OpenAI client with NIM
+├── lora_tutorial/                  # Training data and configs
+│   └── data/                       # Sample datasets
+├── ngc-cli/                        # NGC CLI scripts
+├── img/                            # Workshop images
+└── .env                            # API keys (create this file)
 ```
 
 ## 🔧 Key Technologies
@@ -60,10 +74,22 @@ NIM-build-tune-deploy-participant/
 - **NeMo Framework**: For training and fine-tuning LLMs
 - **LoRA**: Efficient fine-tuning technique
 - **Docker**: Container-based deployment
+- **NGC (NVIDIA GPU Cloud)**: Container registry and model repository
 
 ## 📝 Notes
 
 - The workshop uses Llama 3.1 8B Instruct as the base model
+- NIM containers require significant disk space (~50GB per model)
+- First-time model downloads may take 5-10 minutes
+- Subsequent runs use cached models for faster startup
+
+## 🐛 Troubleshooting
+
+If you encounter issues:
+1. Ensure all API keys are properly set in the `.env` file
+2. Verify Docker and NVIDIA Container Runtime are installed
+3. Check that your GPU has sufficient memory (16GB+ recommended)
+4. Confirm you have enough disk space for model caching
 
 ## 📄 License
 
